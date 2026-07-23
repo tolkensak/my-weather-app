@@ -3,7 +3,7 @@
 
 import { useQuery } from '@tanstack/react-query';
 import { useCallback } from 'react';
-import useAppStore from '../../store/useAppStore';
+import {useAppStore, cities, weatherDescription, } from '../../store/useAppStore';
 
 export default function WeatherPage() {
     const city = useAppStore((state) => state.city);
@@ -12,8 +12,6 @@ export default function WeatherPage() {
     const ResetRefreshCount = useAppStore((state) => state.ResetRefreshCount);
     const incrementRefreshCount = useAppStore((state) => state.incrementRefreshCount);
     const weatherTemperatureDisplay = useAppStore((state) => state.weatherTemperatureDisplay);
-    const weatherDescription = useAppStore((state) => state.weatherDescription);
-    const cities = useAppStore((state) => state.cities);
     const autoRefresh = useAppStore((state) => state.autoRefresh);
 
     // ✅ Use a single query

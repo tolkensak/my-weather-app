@@ -1,7 +1,7 @@
 // api.tsx - Fixed version
 
-// ✅ Add this type definition at the top
-interface CustomFetchOptions extends Omit<RequestInit, 'body'> {
+// ✅ Add export
+export interface CustomFetchOptions extends Omit<RequestInit, 'body'> {
     body?: unknown;
 }
 
