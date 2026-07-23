@@ -37,15 +37,28 @@ export async function GET(request: Request) {
     const { searchParams } = new URL(request.url);
     const city = searchParams.get('city') || 'Almaty';
     
-    // Fetch weather data
-    const response = await fetch(buildWeatherUrl(city));
-
-    const data = await response.json();
-    
-    return NextResponse.json({
-        city: city,
-        temperature: data.current_weather.temperature,
-        weatherCode: data.current_weather.weathercode,
-        windSpeed: data.current_weather.windspeed,
-    });
+    try {
+        // ✅ Fetch weather data
+        const response = await fetch(buildWeatherUrl(city));
+        
+        if (!response.ok) {
+            throw new Error(`HTTP error! status: ${response.status}`);
+        }
+        
+        // ✅ Parse the response
+        const data = await response.json();
+        
+        // ✅ Return formatted data
+        return NextResponse.json({
+            city: city,
+            temperature: data.current_weather.temperature,
+            weatherCode: data.current_weather.weathercode,
+            windSpeed: data.current_weather.windspeed,
+        });
+    } catch (error) {
+        return NextResponse.json(
+            { error: 'Failed to fetch weather data' },
+            { status: 500 }
+        );
+    }
 }
