@@ -1,4 +1,4 @@
-// api.tsx - Fixed version
+// api.ts - Fixed version
 
 // ✅ Add export
 export interface CustomFetchOptions extends Omit<RequestInit, 'body'> {
