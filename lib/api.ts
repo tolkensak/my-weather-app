@@ -40,18 +40,18 @@ async function http<T>(url: string, options: CustomFetchOptions = {}): Promise<T
 // Typed API methods exposed to the application
 export const api = {
     get: <T>(url: string, options?: Omit<CustomFetchOptions, 'body' | 'method'>) => {
-        return http<T>(url, {...options, method: 'GET' });
+        return http<T>(url, { ...options, method: 'GET' });
     },
 
-            post: <T>(url: string, body: unknown, options?: Omit<CustomFetchOptions, 'body' | 'method'>) => {
-        return http<T>(url, {...options, method: 'POST', body });
+    post: <T>(url: string, body: unknown, options?: Omit<CustomFetchOptions, 'body' | 'method'>) => {
+        return http<T>(url, { ...options, method: 'POST', body });
     },
 
-                    put: <T>(url: string, body: unknown, options?: Omit<CustomFetchOptions, 'body' | 'method'>) => {
-        return http<T>(url, {...options, method: 'PUT', body });
+    put: <T>(url: string, body: unknown, options?: Omit<CustomFetchOptions, 'body' | 'method'>) => {
+        return http<T>(url, { ...options, method: 'PUT', body });
     },
 
-                            delete: <T>(url: string, options?: Omit<CustomFetchOptions, 'body' | 'method'>) => {
-        return http<T>(url, {...options, method: 'DELETE' });
+    delete: <T>(url: string, options?: Omit<CustomFetchOptions, 'body' | 'method'>) => {
+        return http<T>(url, { ...options, method: 'DELETE' });
     },
 };

@@ -1,8 +1,8 @@
 // app/weather/page.tsx
 import { Suspense } from 'react';
-import CurrentWeather from './components/CurrentWeather';
-import Forecast from './components/Forecast';
-import WeatherSkeleton from './components/WeatherSkeleton';
+import CurrentWeather from '../components/CurrentWeather';
+import Forecast from '../components/Forecast';
+import WeatherSkeleton from '../components/WeatherSkeleton';
 
 export default function WeatherPage() {
     return (

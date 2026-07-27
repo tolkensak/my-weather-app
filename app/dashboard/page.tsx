@@ -1,8 +1,8 @@
 // app/dashboard/page.tsx
 import { Suspense } from 'react';
-import WeatherWidget from './components/WeatherWidget';
-import ForecastWidget from './components/ForecastWidget';
-import AirQualityWidget from './components/AirQualityWidget';
+import WeatherWidget from '../components/WeatherWidget';
+import ForecastWidget from '../components/ForecastWidget';
+import AirQualityWidget from '../components/AirQualityWidget';
 
 export default function DashboardPage() {
     return (

@@ -9,7 +9,7 @@ export default async function WeatherData() {
     const data = await fetchWeather();
 
     return (
-        <div className="p-4 border rounded-lg">
+        <div className="p-4 border rounded-lg mt-4">
             <h3 className="font-bold">Current Weather</h3>
             <p>🌡️ {data.current_weather.temperature}°C</p>
             <p>💨 Wind: {data.current_weather.windspeed} km/h</p>
