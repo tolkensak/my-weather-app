@@ -10,7 +10,7 @@ async function getForecast() {
 
 export default async function Forecast() {
     const data = await getForecast();
-    
+
     return (
         <div className="p-6 border rounded-lg shadow-sm bg-white dark:bg-gray-800">
             <h2 className="text-xl font-semibold">📅 Weather Forecast</h2>
@@ -19,10 +19,10 @@ export default async function Forecast() {
                     <div key={day} className="flex items-center justify-between p-3 bg-gray-50 dark:bg-gray-700 rounded-lg">
                         <div className="flex items-center gap-3">
                             <span className="font-medium">
-                                {new Date(day).toLocaleDateString('en-US', { 
-                                    weekday: 'long', 
-                                    month: 'short', 
-                                    day: 'numeric' 
+                                {new Date(day).toLocaleDateString('en-US', {
+                                    weekday: 'long',
+                                    month: 'short',
+                                    day: 'numeric'
                                 })}
                             </span>
                         </div>

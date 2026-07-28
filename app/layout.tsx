@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import { Suspense } from "react";
+import Navigation from "./components/Navigation";
 
 const geistSans = Geist({
     variable: "--font-geist-sans",
@@ -23,6 +24,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <html lang="en">
             <body>
                 <header>🌡️ Weather App</header>
+                <Navigation />
                 <Suspense fallback={<div>Loading content...</div>}>
                     {children}
                 </Suspense>

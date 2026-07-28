@@ -10,7 +10,7 @@ async function getWeather() {
 
 export default async function WeatherWidget() {
     const data = await getWeather();
-    
+
     return (
         <div className="p-6 border rounded-lg shadow-sm bg-white dark:bg-gray-800">
             <h3 className="text-xl font-semibold">🌡️ Current Weather</h3>

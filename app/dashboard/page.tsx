@@ -6,19 +6,21 @@ import AirQualityWidget from '../components/AirQualityWidget';
 
 export default function DashboardPage() {
     return (
-        <div className="grid grid-cols-3 gap-4">
-            {/* ✅ Each widget loads independently - no waterfall! */}
-            <Suspense fallback={<WidgetSkeleton title="Weather" />}>
-                <WeatherWidget />
-            </Suspense>
-            
-            <Suspense fallback={<WidgetSkeleton title="Forecast" />}>
-                <ForecastWidget />
-            </Suspense>
-            
-            <Suspense fallback={<WidgetSkeleton title="Air Quality" />}>
-                <AirQualityWidget />
-            </Suspense>
+        <div>
+            <div className="grid grid-cols-3 gap-4 mt-10">
+                {/* ✅ Each widget loads independently - no waterfall! */}
+                <Suspense fallback={<WidgetSkeleton title="Weather" />}>
+                    <WeatherWidget />
+                </Suspense>
+
+                <Suspense fallback={<WidgetSkeleton title="Forecast" />}>
+                    <ForecastWidget />
+                </Suspense>
+
+                <Suspense fallback={<WidgetSkeleton title="Air Quality" />}>
+                    <AirQualityWidget city="Almaty" />
+                </Suspense>
+            </div>
         </div>
     );
 }

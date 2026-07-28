@@ -10,7 +10,7 @@ async function getForecast() {
 
 export default async function ForecastWidget() {
     const data = await getForecast();
-    
+
     return (
         <div className="p-6 border rounded-lg shadow-sm bg-white dark:bg-gray-800">
             <h3 className="text-xl font-semibold">📅 5-Day Forecast</h3>
