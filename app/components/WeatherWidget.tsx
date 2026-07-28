@@ -1,9 +1,14 @@
 // app/components/WeatherWidget.tsx
+
+import { cityData } from '../globals';
+
 async function getWeather() {
+    const { lat, lon } = cityData.getCity();
     const res = await fetch(
-        'https://api.open-meteo.com/v1/forecast?latitude=43.2516&longitude=76.9089&current_weather=true',
+        `https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lon}&current_weather=true`,
         { next: { revalidate: 60 } }
     );
+    
     if (!res.ok) throw new Error('Failed to fetch weather');
     return res.json();
 }

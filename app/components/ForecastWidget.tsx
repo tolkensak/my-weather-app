@@ -1,9 +1,14 @@
 // app/components/ForecastWidget.tsx
+
+import { cityData } from '../globals';
+
 async function getForecast() {
+    const { lat, lon } = cityData.getCity();
     const res = await fetch(
-        'https://api.open-meteo.com/v1/forecast?latitude=43.2516&longitude=76.9089&daily=temperature_2m_max,temperature_2m_min&timezone=auto&forecast_days=5',
+        `https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lon}&daily=temperature_2m_max,temperature_2m_min&timezone=auto&forecast_days=5`,
         { next: { revalidate: 3600 } }
     );
+    
     if (!res.ok) throw new Error('Failed to fetch forecast');
     return res.json();
 }

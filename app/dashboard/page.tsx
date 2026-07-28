@@ -3,11 +3,21 @@ import { Suspense } from 'react';
 import WeatherWidget from '../components/WeatherWidget';
 import ForecastWidget from '../components/ForecastWidget';
 import AirQualityWidget from '../components/AirQualityWidget';
+import { cityData, cities } from '../globals';
 
 export default function DashboardPage() {
     return (
         <div>
-            <div className="grid grid-cols-3 gap-4 mt-10">
+            <div className="text-2xl font-bold py-6">📊 Dashboard</div>
+            <div className="py-3">
+                <select value={cityData.cityName}>
+                    {Object.entries(cities).map(([cName, cData]) => (
+                        <option key={cName} value={cName}>{cData.text}</option>
+                    ))}
+                </select>
+            </div>
+
+            <div className="grid grid-cols-3 gap-4">
                 {/* ✅ Each widget loads independently - no waterfall! */}
                 <Suspense fallback={<WidgetSkeleton title="Weather" />}>
                     <WeatherWidget />
@@ -18,7 +28,7 @@ export default function DashboardPage() {
                 </Suspense>
 
                 <Suspense fallback={<WidgetSkeleton title="Air Quality" />}>
-                    <AirQualityWidget city="Almaty" />
+                    <AirQualityWidget />
                 </Suspense>
             </div>
         </div>

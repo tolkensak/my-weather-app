@@ -1,45 +1,31 @@
-// app/weather/components/CurrentWeather.tsx
-'use client';
+// app/components/CurrentWeather.tsx
 
-// import { useQuery } from '@tanstack/react-query';
-import { cities } from '../../store/useAppStore';
+import { cityData } from '../globals';
 
-// This is the old version of the getWeather function that fetches data directly from the Open-Meteo API.
-async function getWeather(city: string) {
-    const { lat, lon } = cities[city];
+async function getWeather() {
+    const { lat, lon } = cityData.getCity();
     const res = await fetch(
         `https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lon}&current_weather=true`,
-        { next: { revalidate: 60 } } // ✅ Revalidate every 60 seconds
+        { next: { revalidate: 60 } }
     );
-
+    
     if (!res.ok) throw new Error('Failed to fetch weather');
     return res.json();
 }
 
-// async function getWeather(city: string) {
-//     const { data } = useQuery({
-//         queryKey: ['weather', city],
-//         queryFn: async () => {
-//             const res = await fetch(`/api/weather?city=${city}`).then(r => r.json());
-//             return res.json();
-//         }
-//     });
-
-//     return data;
-// }
-
-export default async function CurrentWeather({ city }: { city: string }) {
-    const data = await getWeather(city);
-
+export default async function CurrentWeather() {
+    const data = await getWeather();
+    
     return (
-        <div className="p-6 border rounded-lg shadow-sm">
-            <h2 className="text-xl font-semibold">📍 {city}</h2>
+        <div className="p-6 border rounded-lg shadow-sm bg-white dark:bg-gray-800">
+            <h3 className="text-xl font-semibold">🌡️ Current Weather</h3>
             <div className="mt-4">
-                <p className="text-4xl font-bold">
-                    {data.current_weather.temperature} °C
+                <p className="text-4xl font-bold">{data.current_weather.temperature}°C</p>
+                <p className="text-gray-600 dark:text-gray-400 mt-2">
+                    💨 Wind: {data.current_weather.windspeed} km/h
                 </p>
-                <p className="text-gray-600 mt-2">
-                    Wind: {data.current_weather.windspeed} km/h
+                <p className="text-sm text-gray-500 dark:text-gray-400 mt-4">
+                    Last updated: {new Date().toLocaleTimeString()}
                 </p>
             </div>
         </div>

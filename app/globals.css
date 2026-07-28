@@ -46,3 +46,11 @@ h1 {
 h3 {
     margin-bottom: 10px;
 }
+
+select {
+    background: var(--background);
+    color: var(--foreground);
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    padding: 6px;
+}
