@@ -1,4 +1,4 @@
-// app/components/AirQualityWidget.tsx
+// app/components/AirQuality.tsx
 
 import { weatherCodes } from '../lib/globals';
 
@@ -8,7 +8,7 @@ async function getAirQuality(city: string) {
     return res.json();
 }
 
-export default async function AirQualityWidget({ city }: { city: string }) {
+export default async function AirQuality({ city }: { city: string }) {
     const data = await getAirQuality(city);
 
     const getColor = (aqi: number) => {

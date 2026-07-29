@@ -2,10 +2,10 @@
 
 import { Suspense } from 'react';
 import { cities } from '../lib/globals';
-import WeatherWidget from '../components/WeatherWidget';
-import ForecastWidget from '../components/ForecastWidget';
-import AirQualityWidget from '../components/AirQualityWidget';
+import Forecast from '../components/Forecast';
+import AirQuality from '../components/AirQuality';
 import CitySelector from '../components/CitySelector';
+import CurrentWeather from '../components/CurrentWeather';
 
 type Props = {
     searchParams: Promise<{ city?: string }>;
@@ -23,17 +23,17 @@ export default async function DashboardPage({ searchParams }: Props) {
             </div>
 
             <div className="grid grid-cols-3 gap-4">
-                {/* ✅ Each widget loads independently - no waterfall! */}
-                <Suspense fallback={<WidgetSkeleton title="Weather" />}>
-                    <WeatherWidget city={city} />
+                {/* ✅ Each  loads independently - no waterfall! */}
+                <Suspense fallback={<WidgetSkeleton title="Current Weather" />}>
+                    <CurrentWeather city={city} />
                 </Suspense>
 
                 <Suspense fallback={<WidgetSkeleton title="Forecast" />}>
-                    <ForecastWidget city={city} />
+                    <Forecast city={city} />
                 </Suspense>
 
                 <Suspense fallback={<WidgetSkeleton title="Air Quality" />}>
-                    <AirQualityWidget city={city} />
+                    <AirQuality city={city} />
                 </Suspense>
             </div>
         </div>
