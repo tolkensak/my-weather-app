@@ -2,9 +2,10 @@
 
 import { Suspense } from 'react';
 import { cities } from './lib/globals';
-import WeatherData from './components/WeatherData';
-import ForecastData from './components/ForecastData';
 import CitySelector from './components/CitySelector';
+import CurrentWeather from './components/CurrentWeather';
+import Forecast from './components/Forecast';
+import WeatherSkeleton from './components/WeatherSkeleton';
 
 type Props = {
     searchParams: Promise<{ city?: string }>;
@@ -12,26 +13,23 @@ type Props = {
 
 export default async function HomePage({ searchParams }: Props) {
     const params = await searchParams;
-    const city = params.city || Object.keys(cities)[0];
-
+    const city = params.city || 'Almaty';
+    
     return (
-        <div className="container mx-auto p-4">
+        <main className="container mx-auto p-4">
             <div className="flex justify-between items-center mb-6">
-                <CitySelector selectedCity={city} cities={cities} path="" />
+                <h1 className="text-3xl font-bold">🏠 Home</h1>
+                <CitySelector selectedCity={city} cities={cities} path="/" />
             </div>
-
-            {/* ✅ Each component loads independently */}
-            <div>
+            
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <Suspense fallback={<div>Loading weather...</div>}>
-                    <WeatherData city={city} />
+                    <CurrentWeather city={city} />
                 </Suspense>
-            </div>
-
-            <div className="mt-8">
                 <Suspense fallback={<div>Loading forecast...</div>}>
-                    <ForecastData city={city} />
+                    <Forecast city={city} days={7} />
                 </Suspense>
             </div>
-        </div>
+        </main>
     );
 }

@@ -14,6 +14,10 @@ async function getWeather(city: string) {
 }
 
 export default async function CurrentWeather({ city }: { city: string }) {
+    if (city === 'ERROR') {
+        throw new Error('💥 Test error!');
+    }
+
     const data = await getWeather(city);
     const description = weatherCodes[data.current_weather.weathercode] || 'Unknown';
     
