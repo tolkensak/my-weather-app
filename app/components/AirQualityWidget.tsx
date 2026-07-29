@@ -1,16 +1,15 @@
 // app/components/AirQualityWidget.tsx
 
-import { cityData } from '../globals';
+import { weatherCodes } from '../lib/globals';
 
 // Will use Open-Meteo's air quality API
-async function getAirQuality() {
-    const { lat, lon } = cityData.getCity();
-    const res = await fetch(`https://air-quality-api.open-meteo.com/v1/air-quality?latitude=${lat}&longitude=${lon}&current=pm10,pm2_5,us_aqi`);
+async function getAirQuality(city: string) {
+    const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL || 'http://localhost:3000'}/api/weather?city=${city}&type=air-quality`);
     return res.json();
 }
 
-export default async function AirQualityWidget() {
-    const data = await getAirQuality();
+export default async function AirQualityWidget({ city }: { city: string }) {
+    const data = await getAirQuality(city);
 
     const getColor = (aqi: number) => {
         if (aqi <= 50) return 'text-green-500 dark:text-green-400';

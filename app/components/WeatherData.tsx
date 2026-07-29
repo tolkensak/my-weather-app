@@ -1,16 +1,15 @@
 // app/components/WeatherData.tsx
 
-import { cityData } from '../globals';
-
-async function fetchWeather() {
-    const { lat, lon } = cityData.getCity();
-    const res = await fetch(`https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lon}&current_weather=true`);
+async function fetchWeather(city: string) {
+    const res = await fetch(
+        `${process.env.NEXT_PUBLIC_BASE_URL || 'http://localhost:3000'}/api/weather?city=${city}&type=weather`
+    );
     return res.json();
 }
 
-export default async function WeatherData() {
+export default async function WeatherData({ city }: { city: string }) {
     // ✅ This component is async and will suspend
-    const data = await fetchWeather();
+    const data = await fetchWeather(city);
 
     return (
         <div className="p-6 border rounded-lg shadow-sm bg-white dark:bg-gray-800">

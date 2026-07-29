@@ -1,11 +1,8 @@
 // app/components/Forecast.tsx
 
-import { cityData } from '../globals';
-
-async function getForecast() {
-    const { lat, lon } = cityData.getCity();
+async function getForecast(city: string) {
     const res = await fetch(
-        `https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lon}&daily=temperature_2m_max,temperature_2m_min&timezone=auto&forecast_days=5`,
+        `${process.env.NEXT_PUBLIC_BASE_URL || 'http://localhost:3000'}/api/weather?city=${city}&type=forecast`,
         { next: { revalidate: 3600 } }
     );
     
@@ -13,9 +10,9 @@ async function getForecast() {
     return res.json();
 }
 
-export default async function Forecast() {
-    const data = await getForecast();
-    
+export default async function Forecast({ city }: { city: string }) {
+    const data = await getForecast(city);
+
     return (
         <div className="p-6 border rounded-lg shadow-sm bg-white dark:bg-gray-800">
             <h3 className="text-xl font-semibold">📅 5-Day Forecast</h3>

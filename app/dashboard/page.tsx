@@ -1,34 +1,38 @@
 // app/dashboard/page.tsx
+
 import { Suspense } from 'react';
+import { cities } from '../lib/globals';
 import WeatherWidget from '../components/WeatherWidget';
 import ForecastWidget from '../components/ForecastWidget';
 import AirQualityWidget from '../components/AirQualityWidget';
-import { cityData, cities } from '../globals';
+import CitySelector from '../components/CitySelector';
 
-export default function DashboardPage() {
+type Props = {
+    searchParams: Promise<{ city?: string }>;
+};
+
+export default async function DashboardPage({ searchParams }: Props) {
+    const params = await searchParams;
+    const city = params.city || Object.keys(cities)[0];
+    
     return (
-        <div>
-            <div className="text-2xl font-bold py-6">📊 Dashboard</div>
-            <div className="py-3">
-                <select value={cityData.cityName}>
-                    {Object.entries(cities).map(([cName, cData]) => (
-                        <option key={cName} value={cName}>{cData.text}</option>
-                    ))}
-                </select>
+        <div className="container mx-auto p-4">
+            <div className="flex justify-between items-center mb-6">
+                <CitySelector selectedCity={city} cities={cities} path="/dashboard" />
             </div>
 
             <div className="grid grid-cols-3 gap-4">
                 {/* ✅ Each widget loads independently - no waterfall! */}
                 <Suspense fallback={<WidgetSkeleton title="Weather" />}>
-                    <WeatherWidget />
+                    <WeatherWidget city={city} />
                 </Suspense>
 
                 <Suspense fallback={<WidgetSkeleton title="Forecast" />}>
-                    <ForecastWidget />
+                    <ForecastWidget city={city} />
                 </Suspense>
 
                 <Suspense fallback={<WidgetSkeleton title="Air Quality" />}>
-                    <AirQualityWidget />
+                    <AirQualityWidget city={city} />
                 </Suspense>
             </div>
         </div>

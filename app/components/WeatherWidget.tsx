@@ -1,11 +1,8 @@
 // app/components/WeatherWidget.tsx
 
-import { cityData } from '../globals';
-
-async function getWeather() {
-    const { lat, lon } = cityData.getCity();
+async function getWeather(city: string) {
     const res = await fetch(
-        `https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lon}&current_weather=true`,
+        `${process.env.NEXT_PUBLIC_BASE_URL || 'http://localhost:3000'}/api/weather?city=${city}&type=weather`,
         { next: { revalidate: 60 } }
     );
     
@@ -13,8 +10,8 @@ async function getWeather() {
     return res.json();
 }
 
-export default async function WeatherWidget() {
-    const data = await getWeather();
+export default async function WeatherWidget({ city }: { city: string }) {
+    const data = await getWeather(city);
 
     return (
         <div className="p-6 border rounded-lg shadow-sm bg-white dark:bg-gray-800">
