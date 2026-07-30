@@ -20,9 +20,9 @@ function buildWeatherUrl(cityName: string): string {
     return `https://api.open-meteo.com/v1/forecast?latitude=${location.lat}&longitude=${location.lon}&current_weather=true`;
 }
 
-function buildForecastUrl(cityName: string): string {
+function buildForecastUrl(cityName: string, days: number): string {
     const location = cities[cityName] || cities["Almaty"];
-    return `https://api.open-meteo.com/v1/forecast?latitude=${location.lat}&longitude=${location.lon}&daily=temperature_2m_max,temperature_2m_min&timezone=auto&forecast_days=7`;
+    return `https://api.open-meteo.com/v1/forecast?latitude=${location.lat}&longitude=${location.lon}&daily=temperature_2m_max,temperature_2m_min&timezone=auto&forecast_days=${days}`;
 }
 
 function buildAirQualityUrl(cityName: string): string {
@@ -34,11 +34,12 @@ export async function GET(request: Request) {
     const { searchParams } = new URL(request.url);
     const city = searchParams.get('city') || 'Almaty';
     const type = searchParams.get('type') || 'weather'; // 'weather' or 'forecast' or 'air-quality'
+    const days = parseInt(searchParams.get('days') || '5');
 
     try {
         let url: string;
         if (type === 'forecast') {
-            url = buildForecastUrl(city);
+            url = buildForecastUrl(city, days);
         } else if (type === 'air-quality') {
             url = buildAirQualityUrl(city);
         } else {

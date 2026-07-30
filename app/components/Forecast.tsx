@@ -1,6 +1,6 @@
 // app/components/Forecast.tsx
 
-async function getForecast(city: string) {
+async function getForecast(city: string, days: number) {
     const res = await fetch(
         `${process.env.NEXT_PUBLIC_BASE_URL || 'http://localhost:3000'}/api/weather?city=${city}&type=forecast`,
         { next: { revalidate: 3600 } }
@@ -10,12 +10,12 @@ async function getForecast(city: string) {
     return res.json();
 }
 
-export default async function Forecast({ city }: { city: string }) {
-    const data = await getForecast(city);
+export default async function Forecast({ city, days = 5 }: { city: string; days?: number }) {
+    const data = await getForecast(city, days);
 
     return (
         <div className="p-6 border rounded-lg shadow-sm bg-white dark:bg-gray-800">
-            <h3 className="text-xl font-semibold">📅 5-Day Forecast</h3>
+            <h3 className="text-xl font-semibold">📅 {days}-Day Forecast</h3>
             <div className="mt-4 space-y-3">
                 {data.daily.time.map((day: string, index: number) => (
                     <div key={day} className="flex justify-between items-center border-b border-gray-100 dark:border-gray-700 pb-2">
