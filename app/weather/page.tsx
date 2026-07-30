@@ -1,4 +1,5 @@
 // app/weather/page.tsx
+
 import { Suspense } from 'react';
 import { cities } from '../lib/globals';
 import CurrentWeather from '../components/CurrentWeather';
