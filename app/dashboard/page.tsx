@@ -13,7 +13,7 @@ type Props = {
 
 export default async function DashboardPage({ searchParams }: Props) {
     const params = await searchParams;
-    const city = params.city || Object.keys(cities)[0];
+    const city = params.city || 'Almaty';
     
     return (
         <div className="container mx-auto p-4">

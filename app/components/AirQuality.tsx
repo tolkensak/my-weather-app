@@ -31,7 +31,6 @@ export default async function AirQuality({ city }: { city: string }) {
             <div className={`mt-4 ${getColor(data.current.us_aqi)}`}>
                 <div className="text-4xl font-bold">{data.current.us_aqi} {data.current_units.us_aqi}</div>
                 <div className="text-xl font-medium">{getCategory(data.current.us_aqi)}</div>
-                {/* <div className="text-gray-600 dark:text-gray-400 mt-2 text-sm">{data.current.description}</div> */}
             </div>
         </div>
     );
