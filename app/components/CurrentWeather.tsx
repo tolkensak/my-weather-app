@@ -1,6 +1,7 @@
 // app/components/CurrentWeather.tsx
 
-import { weatherCodes } from '../lib/globals';
+import { weatherDescriptions } from '../lib/globals';
+import { weatherIcons } from '../lib/weatherIcons';
 
 async function getWeather(city: string) {
     // ✅ Now using our API route!
@@ -19,7 +20,7 @@ export default async function CurrentWeather({ city }: { city: string }) {
     }
 
     const data = await getWeather(city);
-    const description = weatherCodes[data.current_weather.weathercode] || 'Unknown';
+    const description = (weatherIcons[data.current_weather.weathercode] + weatherDescriptions[data.current_weather.weathercode]) || 'Unknown';
     
     return (
         <div className="p-6 border rounded-lg shadow-sm bg-white dark:bg-gray-800">

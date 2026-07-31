@@ -6,6 +6,7 @@ import CurrentWeather from '../components/CurrentWeather';
 import Forecast from '../components/Forecast';
 import WeatherSkeleton from '../components/WeatherSkeleton';
 import CitySelector from '../components/CitySelector';
+import AnimatedTransition from '../components/AnimatedTransition';
 
 type Props = {
     searchParams: Promise<{ city?: string }>;
@@ -16,21 +17,23 @@ export default async function WeatherPage({ searchParams }: Props) {
     const city = params.city || 'Almaty';
     
     return (
-        <div className="container mx-auto p-4">
-            <div className="flex justify-between items-center mb-6">
-                <h1 className="text-3xl font-bold">🌤️ Weather</h1>
-                <CitySelector selectedCity={city} cities={cities} path="/weather" />
-            </div>
+        <AnimatedTransition>
+            <div className="container mx-auto p-4">
+                <div className="flex justify-between items-center mb-6">
+                    <h1 className="text-3xl font-bold">🌤️ Weather</h1>
+                    <CitySelector selectedCity={city} cities={cities} path="/weather" />
+                </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                <Suspense fallback={<WeatherSkeleton title="Current Weather" />}>
-                    <CurrentWeather city={city} />
-                </Suspense>
-                
-                <Suspense fallback={<WeatherSkeleton title="5-Day Forecast" />}>
-                    <Forecast city={city} />
-                </Suspense>
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <Suspense fallback={<WeatherSkeleton title="Current Weather" />}>
+                        <CurrentWeather city={city} />
+                    </Suspense>
+                    
+                    <Suspense fallback={<WeatherSkeleton title="5-Day Forecast" />}>
+                        <Forecast city={city} />
+                    </Suspense>
+                </div>
             </div>
-        </div>
+        </AnimatedTransition>
     );
 }

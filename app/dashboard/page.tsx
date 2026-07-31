@@ -6,6 +6,7 @@ import Forecast from '../components/Forecast';
 import AirQuality from '../components/AirQuality';
 import CitySelector from '../components/CitySelector';
 import CurrentWeather from '../components/CurrentWeather';
+import AnimatedTransition from '../components/AnimatedTransition';
 
 type Props = {
     searchParams: Promise<{ city?: string }>;
@@ -16,27 +17,29 @@ export default async function DashboardPage({ searchParams }: Props) {
     const city = params.city || 'Almaty';
     
     return (
-        <div className="container mx-auto p-4">
-            <div className="flex justify-between items-center mb-6">
-                <h1 className="text-3xl font-bold">📊 Dashboard</h1>
-                <CitySelector selectedCity={city} cities={cities} path="/dashboard" />
+        <AnimatedTransition>
+            <div className="container mx-auto p-4">
+                <div className="flex justify-between items-center mb-6">
+                    <h1 className="text-3xl font-bold">📊 Dashboard</h1>
+                    <CitySelector selectedCity={city} cities={cities} path="/dashboard" />
+                </div>
+
+                <div className="grid grid-cols-3 gap-4">
+                    {/* ✅ Each  loads independently - no waterfall! */}
+                    <Suspense fallback={<WidgetSkeleton title="Current Weather" />}>
+                        <CurrentWeather city={city} />
+                    </Suspense>
+
+                    <Suspense fallback={<WidgetSkeleton title="Forecast" />}>
+                        <Forecast city={city} />
+                    </Suspense>
+
+                    <Suspense fallback={<WidgetSkeleton title="Air Quality" />}>
+                        <AirQuality city={city} />
+                    </Suspense>
+                </div>
             </div>
-
-            <div className="grid grid-cols-3 gap-4">
-                {/* ✅ Each  loads independently - no waterfall! */}
-                <Suspense fallback={<WidgetSkeleton title="Current Weather" />}>
-                    <CurrentWeather city={city} />
-                </Suspense>
-
-                <Suspense fallback={<WidgetSkeleton title="Forecast" />}>
-                    <Forecast city={city} />
-                </Suspense>
-
-                <Suspense fallback={<WidgetSkeleton title="Air Quality" />}>
-                    <AirQuality city={city} />
-                </Suspense>
-            </div>
-        </div>
+        </AnimatedTransition>
     );
 }
 

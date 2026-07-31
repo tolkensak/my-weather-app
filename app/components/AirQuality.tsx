@@ -1,7 +1,5 @@
 // app/components/AirQuality.tsx
 
-import { weatherCodes } from '../lib/globals';
-
 // Will use Open-Meteo's air quality API
 async function getAirQuality(city: string) {
     const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL || 'http://localhost:3000'}/api/weather?city=${city}&type=air-quality`);
