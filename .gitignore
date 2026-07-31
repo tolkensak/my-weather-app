@@ -43,3 +43,8 @@ next-env.d.ts
 # shortcuts
 *.url
 *.lnk
+
+/app/generated/prisma
+.windsurf
+.agents
+.claude
