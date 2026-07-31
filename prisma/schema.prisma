@@ -6,6 +6,8 @@ generator client {
 
 datasource db {
   provider = "sqlite"
+  // ✅ Use Vercel Blob URL
+  url = env("DATABASE_URL")
 }
 
 model User {
