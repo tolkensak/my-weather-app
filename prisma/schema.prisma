@@ -5,13 +5,13 @@ generator client {
 }
 
 datasource db {
-  provider = "sqlite"
+  provider = "postgresql"  // ✅ Change to PostgreSQL
 }
 
 model User {
-  id        Int      @id @default(autoincrement())
+  id        String   @id @default(cuid())  // ✅ Use String for Prisma with NextAuth
   email     String   @unique
-  name      String
+  name      String?
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
   preferences UserPreference?
@@ -19,8 +19,8 @@ model User {
 }
 
 model UserPreference {
-  id              Int      @id @default(autoincrement())
-  userId          Int      @unique
+  id              String   @id @default(cuid())
+  userId          String   @unique
   user            User     @relation(fields: [userId], references: [id])
   favoriteCity    String   @default("Almaty")
   temperatureUnit String   @default("celsius")
@@ -30,8 +30,8 @@ model UserPreference {
 }
 
 model Search {
-  id        Int      @id @default(autoincrement())
-  userId    Int
+  id        String   @id @default(cuid())
+  userId    String
   user      User     @relation(fields: [userId], references: [id])
   city      String
   createdAt DateTime @default(now())

@@ -1,4 +1,5 @@
 // app/api/auth/[...nextauth]/route.ts
+
 import NextAuth from 'next-auth';
 import GitHubProvider from 'next-auth/providers/github';
 import { PrismaAdapter } from '@auth/prisma-adapter';
@@ -14,7 +15,6 @@ const handler = NextAuth({
     ],
     callbacks: {
         session: async ({ session, user }) => {
-            // ✅ Now 'user.id' is properly typed
             if (session.user) {
                 session.user.id = user.id;
             }
