@@ -1,7 +1,7 @@
 // app/dashboard/page.tsx
 
 import { Suspense } from 'react';
-import { cities } from '../lib/globals';
+import { cities } from '@/lib/globals';
 import Forecast from '../components/Forecast';
 import AirQuality from '../components/AirQuality';
 import CitySelector from '../components/CitySelector';

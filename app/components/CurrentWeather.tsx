@@ -1,7 +1,7 @@
 // app/components/CurrentWeather.tsx
 
-import { weatherDescriptions } from '../lib/globals';
-import { weatherIcons } from '../lib/weatherIcons';
+import { weatherDescriptions } from '@/lib/globals';
+import { weatherIcons } from '@/lib/weatherIcons';
 
 async function getWeather(city: string) {
     // ✅ Now using our API route!

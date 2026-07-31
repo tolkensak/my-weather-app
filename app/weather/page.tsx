@@ -1,7 +1,7 @@
 // app/weather/page.tsx
 
 import { Suspense } from 'react';
-import { cities } from '../lib/globals';
+import { cities } from '@/lib/globals';
 import CurrentWeather from '../components/CurrentWeather';
 import Forecast from '../components/Forecast';
 import WeatherSkeleton from '../components/WeatherSkeleton';

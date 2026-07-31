@@ -1,4 +1,4 @@
-// app/lib/globals.ts
+// lib/globals.ts
 
 export const cities: Record<string, { lat: number; lon: number; text: string }> = {
     Almaty: { lat: 43.2516, lon: 76.9089, text: "🇰🇿 Almaty" },

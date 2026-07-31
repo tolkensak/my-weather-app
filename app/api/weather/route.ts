@@ -1,7 +1,7 @@
 // app/api/weather/route.ts
 
 import { NextResponse } from 'next/server';
-import { cities } from '../../lib/globals';
+import { cities } from '@/lib/globals';
 
 function buildWeatherUrl(cityName: string): string {
     const location = cities[cityName] || cities["Almaty"];
