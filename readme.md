@@ -71,6 +71,8 @@ A full-stack weather dashboard built with Next.js, TypeScript, and PostgreSQL. V
 
 GitHub Repository: https://github.com/tolkensak/my-weather-app
 
+Vercel Live Debo: https://my-weather-app-liard-nine.vercel.app
+
 LinkedIn: https://www.linkedin.com/in/tolkyn-akhmetollauly-0a3873a9/
 
 Portfolio: https://tolkensak.github.io/tolkensak/
