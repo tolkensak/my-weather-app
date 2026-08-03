@@ -14,12 +14,14 @@ A full-stack weather dashboard built with Next.js, TypeScript, and PostgreSQL. V
 
 ## ✨ Features
 
-- 🌦️ **Real-time Weather:** Live current conditions and 7-day forecasts
+- 🖥️ **Server-side rendering:** with Next.js
+- 🌦️ **Real-time Weather:** from Open-Meteo API. Live current conditions and 7-day forecasts
 - 🌍 **City Selection:** Browse weather for multiple global cities
 - 🔐 **Authentication:** Secure login with GitHub OAuth
 - 👤 **User Preferences:** Save favorite cities and settings
 - 🌙 **Dark Mode:** Toggle between light and dark themes
 - 📱 **Responsive Design:** Works perfectly on all devices
+- 💧 **Clean, maintainable codebase**
 
 ## 🛠️ Tech Stack
 
@@ -71,11 +73,11 @@ A full-stack weather dashboard built with Next.js, TypeScript, and PostgreSQL. V
 
 GitHub Repository: https://github.com/tolkensak/my-weather-app
 
-Vercel Live Debo: https://my-weather-app-liard-nine.vercel.app
+Vercel Live Demo: https://my-weather-app-liard-nine.vercel.app
 
-LinkedIn: https://www.linkedin.com/in/tolkyn-akhmetollauly-0a3873a9/
+LinkedIn Profile: https://www.linkedin.com/in/tolkyn-akhmetollauly-0a3873a9/
 
-Portfolio: https://tolkensak.github.io/tolkensak/
+GitHub Portfolio: https://tolkensak.github.io/tolkensak/
 
 ## 📄 License
 This project is open source and available under the MIT License.
